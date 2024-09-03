@@ -1,14 +1,22 @@
-function getData() {
-    const data = fetch('./data.json').then(res => res.json())
-    return data
-  }
-  
-  
-  async function friendListsElement() {
-    const friendLists = document.getElementById("friend_list");
-    const data = await getData() 
+const itemsPerPage = 20; // Jumlah item per halaman
+let currentPage = 1; // Halaman saat ini
+let allData = []; // Menyimpan semua data untuk pencarian
+
+async function getData() {
+    const response = await fetch('./data.json');
+    const data = await response.json();
+    allData = data; // Simpan data untuk pencarian
+    return data;
+}
+
+function renderData(data, page) {
+    const friendList = document.getElementById('friend_list');
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const pageData = data.slice(start, end);
+
     const lists = `
-       ${data.map(i => `
+        ${pageData.map(i => `
             <div class="card">
                 <div class="data">
                     <img src="${i.fotoselfie}" alt="I${i.nama}" class="card-image" />
@@ -39,7 +47,56 @@ function getData() {
         `).join("")}
     `;
     
-    return friendLists.innerHTML = lists;
-  }
-  
-  friendListsElement()
+    friendList.innerHTML = lists;
+}
+
+function renderPagination(totalItems) {
+    const paginationContainer = document.getElementById('pagination-container');
+    const pageCount = Math.ceil(totalItems / itemsPerPage);
+
+    const paginationLinks = Array.from({ length: pageCount }, (_, i) => {
+        const pageNumber = i + 1;
+        return `
+            <a href="#" class="${currentPage === pageNumber ? 'active' : ''}" data-page="${pageNumber}">
+                ${pageNumber}
+            </a>
+        `;
+    }).join("");
+
+    paginationContainer.innerHTML = paginationLinks;
+}
+
+async function updatePage(page) {
+    const data = await getData();
+    const filteredData = filterData(data, document.getElementById('search-input').value);
+    renderData(filteredData, page);
+    renderPagination(filteredData.length);
+}
+
+function filterData(data, searchTerm) {
+    return data.filter(item => item.nama.toLowerCase().includes(searchTerm.toLowerCase()));
+}
+
+function setupPagination() {
+    document.getElementById('pagination-container').addEventListener('click', (event) => {
+        if (event.target.tagName === 'A') {
+            event.preventDefault();
+            currentPage = parseInt(event.target.getAttribute('data-page'));
+            updatePage(currentPage);
+        }
+    });
+}
+
+function setupSearch() {
+    document.getElementById('search-input').addEventListener('input', () => {
+        updatePage(currentPage);
+    });
+}
+
+async function init() {
+    await updatePage(currentPage);
+    setupPagination();
+    setupSearch();
+}
+
+init();

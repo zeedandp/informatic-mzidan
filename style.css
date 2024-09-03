@@ -2,7 +2,8 @@
  
  body {
  	font-family: Arial, sans-serif;
-	background-color: #2f07a0;
+	background: rgb(249,115,67);
+	background: linear-gradient(90deg, rgb(138, 195, 216) 25%, rgb(149, 230, 234) 52%, rgb(120, 190, 191) 85%);
 	font-family: 'Open Sans', sans-serif;
  	justify-content: center;
  	align-items: center;
@@ -20,7 +21,6 @@
 
  .info-table td {
  	padding: 8px;
- 	border-bottom: 1px solid #ddd;
  	vertical-align: top;
  	/* Vertikal alignment untuk memastikan teks tidak terlalu tinggi */
  }
@@ -73,10 +73,7 @@
  }
 
  .card {
-	background-color: #e5e5f7;
-	opacity: 0.8;
-	background: radial-gradient(circle, transparent 20%, #e5e5f7 20%, #e5e5f7 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #e5e5f7 20%, #e5e5f7 80%, transparent 80%, transparent) 25px 25px,linear-gradient(#cfcfd5 2px, transparent 2px) 0 -1px, linear-gradient(90deg, #cfcfd5 2px, #e5e5f7 2px) -1px 0;
-	background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+	background-color: whitesmoke;
 	border-radius: 8px;
 	margin: 0 auto;
  	box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.1);
@@ -355,10 +352,8 @@ nav.menu ul a:hover {
 }
  
 .conteudo {
-	background-color: #e5e5f7;
-	opacity: 0.8;
-	background: radial-gradient(circle, transparent 20%, #e5e5f7 20%, #e5e5f7 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #e5e5f7 20%, #e5e5f7 80%, transparent 80%, transparent) 25px 25px, linear-gradient(#cfcfd5 2px, transparent 2px) 0 -1px, linear-gradient(90deg, #cfcfd5 2px, #e5e5f7 2px) -1px 0;
-	background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+	border-radius: 12px;
+	background-color: whitesmoke;
 	height: 900px;
 	width:600px;
 	padding:15px;
@@ -370,7 +365,8 @@ nav.menu ul a:hover {
 }
 
 .conteudo-background {
-	background-color: #47a9ff;
+	background-color: #5fb1a8;
+	border-radius: 12px;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#933fa1 ', endColorstr='#EA5C54',GradientType=1 );
 	width: 600px;
 	height: 450px;
